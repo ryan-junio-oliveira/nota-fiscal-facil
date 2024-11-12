@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
                         {{ __('Vendas') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('nfe.index')" :active="request()->routeIs('nfe.index')">
+                        {{ __('Notas Fiscais') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -52,7 +55,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -79,6 +82,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                {{ __('Clientes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                {{ __('Produtos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.index')">
+                {{ __('Vendas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('nfe.index')" :active="request()->routeIs('nfe.index')">
+                {{ __('Notas Fiscais') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -98,7 +113,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

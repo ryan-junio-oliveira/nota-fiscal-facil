@@ -10,10 +10,12 @@ class CreateNfesTable extends Migration
     {
         Schema::create('nfes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
-            $table->decimal('total_amount', 10, 2);
-            $table->string('status')->default('pending');
-            $table->string('xml_path')->nullable();
+            $table->string('numero')->unique();
+            $table->date('data_emissao');
+            $table->string('cliente');
+            $table->decimal('valor_total', 10, 2);
+            $table->text('xml_content')->nullable();
+            $table->text('sefaz_response')->nullable();
             $table->timestamps();
         });
     }

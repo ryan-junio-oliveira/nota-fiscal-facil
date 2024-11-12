@@ -21,13 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // NFe Routes
-    Route::get('nfe', [NFeController::class, 'index'])->name('nfe.index');
-    Route::get('nfe/create', [NFeController::class, 'create'])->name('nfe.create');
-    Route::post('nfe', [NFeController::class, 'store'])->name('nfe.store');
-    Route::get('nfe/{nfe}', [NFeController::class, 'show'])->name('nfe.show');
-    Route::get('nfe/{nfe}/edit', [NFeController::class, 'edit'])->name('nfe.edit');
-    Route::put('nfe/{nfe}', [NFeController::class, 'update'])->name('nfe.update');
-    Route::delete('nfe/{nfe}', [NFeController::class, 'destroy'])->name('nfe.destroy');
+    Route::get('/nfe', [NFeController::class, 'index'])->name('nfe.index');
+    Route::get('/nfe/editXml', [NFeController::class, 'editXml'])->name('nfe.editXml');
+    Route::get('/nfe/{nfe}', [NFeController::class, 'show'])->name('nfe.show');
+    Route::post('/nfe/update', [NFeController::class, 'updateXml'])->name('nfe.update');
+    Route::delete('/nfe/{nfe}', [NFeController::class, 'destroy'])->name('nfe.destroy');
 
     // Client Routes
     Route::get('clients', [ClientController::class, 'index'])->name('clients.index');

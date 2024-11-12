@@ -4,9 +4,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NFe;
+use App\Models\Sale;
 use App\Models\Client;
 use App\Models\Product;
-use App\Models\Sale;
+use App\Services\NFeService;
+use App\Services\PDFService;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -88,42 +91,79 @@ class SaleController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validação dos dados recebidos no formulário
+        // Validate form data
         $validated = $request->validate([
             'client_id' => 'required|exists:clients,id',
             'products' => 'required|array',
             'total_amount' => 'required|numeric',
-            'status' => 'required|in:pendente,completa,cancelled',
+            'status' => 'required|in:pending,completed,cancelled',
         ]);
 
-        // Encontra a venda a ser atualizada
+        // Find and update the sale
         $sale = Sale::findOrFail($id);
-
-        // Atualiza os dados da venda
         $sale->client_id = $request->input('client_id');
         $sale->total_amount = $request->input('total_amount');
         $sale->status = $request->input('status');
         $sale->save();
 
-        // Atualiza os produtos relacionados à venda
+        // Update sale products
         $sale->products()->sync([]);
-
         foreach ($request->input('products') as $productId) {
             $quantity = $request->input("quantities.{$productId}");
             $price = Product::find($productId)->price;
 
-            // Adiciona os produtos à venda com as quantidades e preços
+            // Attach products to sale with quantity and price
             $sale->products()->attach($productId, [
                 'quantity' => $quantity,
                 'price' => $price
             ]);
         }
 
-        // Redireciona para a lista de vendas com uma mensagem de sucesso
+        // Generate and save NF-e if status is "completed"
+        if ($sale->status === 'completed') {
+            // Gather sale details for NF-e
+            $nfeData = [
+                'numero' => $sale->id,
+                'dataEmissao' => now()->format('Y-m-d'),
+                'cliente' => $sale->client->name,
+                'valorTotal' => $sale->total_amount,
+                'produtos' => $sale->products->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'price' => $product->price,
+                        'quantity' => $product->pivot->quantity,
+                    ];
+                })->toArray(),
+            ];
+
+            // Generate XML for NF-e
+            $nfeService = new NFeService();
+            $xmlContent = $nfeService->generateXml($nfeData);
+            $response = $nfeService->sendToSefaz($xmlContent);
+
+            // Save NF-e record in database
+            $nfe = NFe::create([
+                'numero' => $nfeData['numero'],
+                'data_emissao' => $nfeData['dataEmissao'],
+                'cliente' => $nfeData['cliente'],
+                'valor_total' => $nfeData['valorTotal'],
+                'xml_content' => $xmlContent,
+                'sefaz_response' => $response,
+            ]);
+
+            // Generate PDF from XML and offer download
+            $pdfService = new PDFService();
+            $pdfContent = $pdfService->generateFromXml($xmlContent);
+            $pdfPath = storage_path("app/public/nfe_{$nfe->numero}.pdf");
+            file_put_contents($pdfPath, $pdfContent);
+
+            return response()->download($pdfPath, "NF-e_{$nfe->numero}.pdf");
+        }
+
+        // Redirect with success message
         return redirect()->route('sales.index')->with('success', 'Venda atualizada com sucesso.');
     }
-
-    // app/Http/Controllers/SaleController.php
 
     public function destroy($id)
     {
