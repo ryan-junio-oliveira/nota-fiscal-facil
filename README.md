@@ -1,131 +1,129 @@
-<div>
-    <h1>Sistema de Gestão de Vendas e Emissão de NF-e</h1>
+# Sistema de Gestão de Vendas e Emissão de NF-e
 
-    Este projeto é uma aplicação web desenvolvida em Laravel para a gestão de vendas, incluindo funcionalidades como o cadastro de clientes, produtos, geração de NF-e (Nota Fiscal Eletrônica) e integração com a SEFAZ para envio de NF-e. Além disso, a aplicação permite a exportação de NF-e em PDF para download.
-    
-    <span class="hljs-section">## Funcionalidades</span>
-    
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Cadastro de Clientes e Produtos**</span>: CRUD completo para clientes e produtos.
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Gestão de Vendas**</span>: Registro de vendas, associando produtos e clientes, e cálculo automático do valor total da venda.
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Emissão de NF-e**</span>: Geração automática de NF-e ao completar uma venda.
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Envio para SEFAZ**</span>: Integração com a SEFAZ para envio e autenticação da NF-e.
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Exportação de NF-e em PDF**</span>: Possibilidade de download de um PDF formatado da NF-e para armazenamento ou impressão.
-    
-    <span class="hljs-section">## Tecnologias Utilizadas</span>
-    
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Back-End**</span>: Laravel (PHP)
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Banco de Dados**</span>: MySQL
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Interface de Usuário**</span>: Tailwind CSS
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Bibliotecas de Geração de PDF**</span>: DomPDF
-    <span class="hljs-bullet">-</span> <span class="hljs-strong">**Comunicação com SEFAZ**</span>: API SEFAZ (via XML)
-    
-    <span class="hljs-section">## Pré-requisitos</span>
-    
-    Para rodar este projeto, é necessário ter instalado:
-    
-    <span class="hljs-bullet">-</span> PHP (&gt;= 8.0)
-    <span class="hljs-bullet">-</span> Composer
-    <span class="hljs-bullet">-</span> MySQL
-    <span class="hljs-bullet">-</span> Node.js e npm
-    <span class="hljs-bullet">-</span> Extensão <span class="hljs-code">`cURL`</span> do PHP para comunicação com SEFAZ
-    <span class="hljs-bullet">-</span> Servidor Nginx ou Apache para deploy
-    
-    <span class="hljs-section">## Instalação e Configuração</span>
-    
-    <span class="hljs-bullet">1.</span> <span class="hljs-strong">**Clone o Repositório**</span>
-    
-       <span class="hljs-code">```bash
-       git clone https://github.com/seu-usuario/seu-repositorio.git
-       cd seu-repositorio
-    </span></code></div></div></pre><ol
-        start="2"><li><p><strong>Instale as Dependências do
-                    Laravel</strong></p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">composer install
-    </code></div></div></pre></li><li><p><strong>Configure o Banco de
-                    Dados</strong></p><p>Crie um banco de dados MySQL
-                e configure o arquivo <code>.env</code> com suas
-                credenciais:</p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">dotenv</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-dotenv">DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=seu_banco
-    DB_USERNAME=seu_usuario
-    DB_PASSWORD=sua_senha
-    </code></div></div></pre></li><li><p><strong>Execute as
-                    Migrações</strong></p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">php artisan migrate
-    </code></div></div></pre></li><li><p><strong>Instale o Tailwind
-                    CSS</strong></p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">npm install &amp;&amp; npm run dev
-    </code></div></div></pre></li><li><p><strong>Configuração
-                    SEFAZ</strong></p><p>Configure no
-                <code>.env</code> as credenciais e URL para
-                comunicação com a SEFAZ.</p></li><li><p><strong>Gere a
-                    Chave da Aplicação</strong></p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">php artisan key:generate
-    </code></div></div></pre></li></ol><h2>Uso</h2><ol><li><p><strong>Inicie
-                    o Servidor de Desenvolvimento</strong></p><pre
-                class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">bash</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-bash">php artisan serve
-    </code></div></div></pre></li><li><p><strong>Acesse o Painel de
-                    Administração</strong></p><p>Abra o navegador e
-                acesse <code>http://127.0.0.1:8000</code>. Você verá o
-                painel de administração, onde poderá realizar
-                operações de vendas e gerar
-                NF-e.</p></li><li><p><strong>Cadastrar Clientes e
-                    Produtos</strong></p><p>Antes de realizar uma
-                venda, cadastre os clientes e produtos no sistema
-                através das páginas de
-                cadastro.</p></li><li><p><strong>Criar uma Venda e
-                    Gerar NF-e</strong></p><ul><li>Acesse a seção de
-                    vendas e crie uma nova venda associando um cliente
-                    e os produtos desejados.</li><li>Após marcar a
-                    venda como “concluída”, a aplicação gerará
-                    automaticamente a NF-e e enviará para a
-                    SEFAZ.</li><li>O PDF da NF-e estará disponível
-                    para download após a conclusão do
-                    processo.</li></ul></li></ol><h2>Estrutura de
-        Pastas</h2><ul><li><strong>app/Http/Controllers</strong>:
-            Controladores principais, incluindo
-            <code>SaleController</code>,
-            <code>ClientController</code>,
-            <code>ProductController</code> e
-            <code>NFeService</code>.</li><li><strong>resources/views</strong>:
-            Templates de views do Laravel, incluindo o formulário de
-            edição de NF-e e
-            visualização.</li><li><strong>routes/web.php</strong>:
-            Definição de rotas da
-            aplicação.</li><li><strong>public/storage</strong>: Local
-            onde o arquivo XML da NF-e será gerado e
-            armazenado.</li></ul><h2>Notas Técnicas</h2><h3>Serviço de
-        NF-e (NFeService)</h3><p>O serviço <code>NFeService</code> é
-        responsável por gerar o XML da NF-e e enviar para a
-        SEFAZ:</p><ul><li><strong>Gerar XML</strong>: Converte os
-            dados da venda em XML no formato exigido pela
-            SEFAZ.</li><li><strong>Enviar para SEFAZ</strong>: Faz a
-            requisição para a SEFAZ, enviando o XML e recebendo a
-            resposta.</li><li><strong>Salvar no Banco de
-                Dados</strong>: Registra a resposta da SEFAZ e o
-            conteúdo do XML gerado.</li></ul><h3>Serviço de PDF
-        (PDFService)</h3><p>O <code>PDFService</code> utiliza o DomPDF
-        para renderizar o modelo HTML da NF-e em um PDF que pode ser
-        baixado ou visualizado pelo usuário.</p><h2>Exemplo de Rotas
-        Importantes</h2><pre
-        class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">php</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-php"><span class="hljs-comment">// Rota para visualizar as vendas</span>
-    <span class="hljs-title class_">Route</span>::<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">'/sales'</span>, [<span class="hljs-title class_">SaleController</span>::<span class="hljs-variable language_">class</span>, <span class="hljs-string">'index'</span>])-&gt;<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">'sales.index'</span>);
-    
-    <span class="hljs-comment">// Rota para criar uma nova venda</span>
-    <span class="hljs-title class_">Route</span>::<span class="hljs-title function_ invoke__">post</span>(<span class="hljs-string">'/sales'</span>, [<span class="hljs-title class_">SaleController</span>::<span class="hljs-variable language_">class</span>, <span class="hljs-string">'store'</span>])-&gt;<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">'sales.store'</span>);
-    
-    <span class="hljs-comment">// Rota para gerar e visualizar a NF-e de uma venda específica</span>
-    <span class="hljs-title class_">Route</span>::<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">'/sales/{id}/nfe'</span>, [<span class="hljs-title class_">NFeController</span>::<span class="hljs-variable language_">class</span>, <span class="hljs-string">'show'</span>])-&gt;<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">'nfe.show'</span>);
-    </code></div></div></pre><h2>Contribuição</h2><p>Contribuições são
-        bem-vindas! Sinta-se à vontade para abrir issues ou enviar PRs
-        com sugestões e melhorias.</p><h2>Licença</h2><p>Este projeto
-        é licenciado sob a MIT License. Para mais detalhes, consulte o
-        arquivo <a rel="noopener"
-            style="--streaming-animation-state: var(--batch-play-state-1); --animation-rate: var(--batch-play-rate-1);"><span
-                style="--animation-count: 2; --streaming-animation-state: var(--batch-play-state-2);">LICENSE</span></a>.</p><hr><p><strong>Autor</strong>:
-        [Seu Nome]</p><pre
-        class="!overflow-visible"><div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950"><div class="flex items-center text-token-text-secondary px-4 py-2 text-xs font-sans justify-between rounded-t-md h-9 bg-token-sidebar-surface-primary dark:bg-token-main-surface-secondary select-none">css</div><div class="sticky top-9 md:top-[5.75rem]"><div class="absolute bottom-0 right-2 flex h-9 items-center"><div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span class="" data-state="closed"><button class="flex gap-1 items-center select-none py-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sm"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>Copy code</button></span></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre hljs language-css">
-    Este `README<span class="hljs-selector-class">.md</span>` fornece uma visão geral, instruções de instalação e uso, além de detalhes técnicos e exemplos de rotas, ajudando qualquer colaborador ou usuário <span class="hljs-selector-tag">a</span> entender e usar seu sistema com eficiência.
-    </code></div></div></pre></div>
+Este projeto é uma aplicação web desenvolvida em Laravel para a gestão de vendas, incluindo funcionalidades como o cadastro de clientes, produtos, geração de NF-e (Nota Fiscal Eletrônica) e integração com a SEFAZ para envio de NF-e. Além disso, a aplicação permite a exportação de NF-e em PDF para download.
+
+## Funcionalidades
+
+- **Cadastro de Clientes e Produtos**: CRUD completo para clientes e produtos.
+- **Gestão de Vendas**: Registro de vendas, associando produtos e clientes, e cálculo automático do valor total da venda.
+- **Emissão de NF-e**: Geração automática de NF-e ao completar uma venda.
+- **Envio para SEFAZ**: Integração com a SEFAZ para envio e autenticação da NF-e.
+- **Exportação de NF-e em PDF**: Possibilidade de download de um PDF formatado da NF-e para armazenamento ou impressão.
+
+## Tecnologias Utilizadas
+
+- **Back-End**: Laravel (PHP)
+- **Banco de Dados**: MySQL
+- **Interface de Usuário**: Tailwind CSS
+- **Bibliotecas de Geração de PDF**: DomPDF
+- **Comunicação com SEFAZ**: API SEFAZ (via XML)
+
+## Pré-requisitos
+
+Para rodar este projeto, é necessário ter instalado:
+
+- PHP (>= 8.0)
+- Composer
+- MySQL
+- Node.js e npm
+- Extensão `cURL` do PHP para comunicação com SEFAZ
+- Servidor Nginx ou Apache para deploy
+
+## Instalação e Configuração
+
+1. **Clone o Repositório**
+
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
+
+2. **Instale as dependencias do laravel**
+
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
+3. **Configure o Banco de Dados**
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=seu_banco
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+```
+
+4. **Execute as migrações**
+
+```bash
+php artisan migrate
+```
+
+5. **Faça o build dos assets e instale dependências**
+
+```bash
+npm install && npm run dev
+```
+
+Configuração SEFAZ
+
+Configure no .env as credenciais e URL para comunicação com a SEFAZ.
+
+Gere a Chave da Aplicação
+
+php artisan key:generate
+
+
+Uso
+Inicie o Servidor de Desenvolvimento
+
+php artisan serve
+Acesse o Painel de Administração
+
+Abra o navegador e acesse http://127.0.0.1:8000. Você verá o painel de administração, onde poderá realizar operações de vendas e gerar NF-e.
+
+Cadastrar Clientes e Produtos
+
+Antes de realizar uma venda, cadastre os clientes e produtos no sistema através das páginas de cadastro.
+
+Criar uma Venda e Gerar NF-e
+
+Acesse a seção de vendas e crie uma nova venda associando um cliente e os produtos desejados.
+Após marcar a venda como “concluída”, a aplicação gerará automaticamente a NF-e e enviará para a SEFAZ.
+O PDF da NF-e estará disponível para download após a conclusão do processo.
+Estrutura de Pastas
+app/Http/Controllers: Controladores principais, incluindo SaleController, ClientController, ProductController e NFeService.
+resources/views: Templates de views do Laravel, incluindo o formulário de edição de NF-e e visualização.
+routes/web.php: Definição de rotas da aplicação.
+public/storage: Local onde o arquivo XML da NF-e será gerado e armazenado.
+Notas Técnicas
+Serviço de NF-e (NFeService)
+O serviço NFeService é responsável por gerar o XML da NF-e e enviar para a SEFAZ:
+
+Gerar XML: Converte os dados da venda em XML no formato exigido pela SEFAZ.
+Enviar para SEFAZ: Faz a requisição para a SEFAZ, enviando o XML e recebendo a resposta.
+Salvar no Banco de Dados: Registra a resposta da SEFAZ e o conteúdo do XML gerado.
+Serviço de PDF (PDFService)
+O PDFService utiliza o DomPDF para renderizar o modelo HTML da NF-e em um PDF que pode ser baixado ou visualizado pelo usuário.
+
+Exemplo de Rotas Importantes
+// Rota para visualizar as vendas
+Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
+
+// Rota para criar uma nova venda
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
+
+// Rota para gerar e visualizar a NF-e de uma venda específica
+Route::get('/sales/{id}/nfe', [NFeController::class, 'show'])->name('nfe.show');
+Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar PRs com sugestões e melhorias.
+
+Licença
+Este projeto é licenciado sob a MIT License. Para mais detalhes, consulte o arquivo LICENSE.
+
+Autor: [Seu Nome]
+
+
+Este `README.md` fornece uma visão geral, instruções de instalação e uso, além de detalhes técnicos e exemplos de rotas, ajudando qualquer colaborador ou usuário a entender e usar seu sistema com eficiência.
