@@ -82,6 +82,8 @@ php artisan key:generate
 
 ```bash
 php artisan serve
+
+npm run dev
 ```
 
 2. **Cadastrar Clientes e Produtos**
